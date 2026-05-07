@@ -1,5 +1,5 @@
 {
-  "id": "esp32",
+  "id": "esp32-openclaw",
   "channels": ["esp32"],
   "configSchema": {
     "type": "object",

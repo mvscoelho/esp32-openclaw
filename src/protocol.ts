@@ -30,54 +30,54 @@ export type UserStatus = 'paired' | 'identified' | 'unknown'
  * UserMessage is sent from Server to Plugin when a user speaks (post-ASR).
  */
 export interface UserMessage {
-  type: typeof TypeUserMessage
-  message_id: string
-  device_id: string
-  /** Voiceprint ID – empty in MVP. */
-  speaker_id: string
-  /** "unknown" in MVP. */
-  user_id: string
-  user_status: UserStatus
-  display_name: string
-  /** ASR transcription. */
-  text: string
-  /** Voiceprint confidence 0.0–1.0. */
-  confidence: number
-  /** Target OpenClaw Agent ID. */
-  agent_id: string
-  /** Unix milliseconds. */
-  timestamp: number
+    type: typeof TypeUserMessage
+    message_id: string
+    device_id: string
+    /** Voiceprint ID – empty in MVP. */
+    speaker_id: string
+    /** "unknown" in MVP. */
+    user_id: string
+    user_status: UserStatus
+    display_name: string
+    /** ASR transcription. */
+    text: string
+    /** Voiceprint confidence 0.0–1.0. */
+    confidence: number
+    /** Target OpenClaw Agent ID. */
+    agent_id: string
+    /** Unix milliseconds. */
+    timestamp: number
 }
 
 export interface DeviceConnected {
-  type: typeof TypeDeviceConnected
-  device_id: string
-  timestamp: string
+    type: typeof TypeDeviceConnected
+    device_id: string
+    timestamp: string
 }
 
 export interface DeviceDisconnected {
-  type: typeof TypeDeviceDisconnected
-  device_id: string
-  timestamp: string
+    type: typeof TypeDeviceDisconnected
+    device_id: string
+    timestamp: string
 }
 
 export interface HeartbeatPing {
-  type: typeof TypeHeartbeatPing
+    type: typeof TypeHeartbeatPing
 }
 
 export interface ErrorMsg {
-  type: typeof TypeError
-  code: number
-  message: string
+    type: typeof TypeError
+    code: number
+    message: string
 }
 
 /** Union of all messages sent from Server to Plugin. */
 export type ServerToPlugin =
-  | UserMessage
-  | DeviceConnected
-  | DeviceDisconnected
-  | HeartbeatPing
-  | ErrorMsg
+    | UserMessage
+    | DeviceConnected
+    | DeviceDisconnected
+    | HeartbeatPing
+    | ErrorMsg
 
 // ── Plugin → Server messages ──────────────────────────────────────────────────
 
@@ -86,27 +86,27 @@ export type ServerToPlugin =
  * is_final is always false; stream end is signaled by AgentReplyDone.
  */
 export interface AgentReplyChunk {
-  type: typeof TypeAgentReply
-  message_id: string
-  device_id: string
-  chunk_index: number
-  text: string
-  agent_id: string
-  /** Always false; use AgentReplyDone for stream end. */
-  is_final: false
-  /** Agent is waiting for the user to speak next. */
-  needs_input: boolean
+    type: typeof TypeAgentReply
+    message_id: string
+    device_id: string
+    chunk_index: number
+    text: string
+    agent_id: string
+    /** Always false; use AgentReplyDone for stream end. */
+    is_final: false
+    /** Agent is waiting for the user to speak next. */
+    needs_input: boolean
 }
 
 /** AgentReplyDone signals the end of a reply stream. */
 export interface AgentReplyDone {
-  type: typeof TypeAgentReplyDone
-  message_id: string
-  device_id: string
+    type: typeof TypeAgentReplyDone
+    message_id: string
+    device_id: string
 }
 
 export interface HeartbeatPong {
-  type: typeof TypeHeartbeatPong
+    type: typeof TypeHeartbeatPong
 }
 
 /** Union of all messages sent from Plugin to Server. */
